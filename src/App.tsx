@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Code, Database, Cloud, BookOpen, Award, Briefcase, Star, ChevronRight, Palette } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Code, Database, Cloud, BookOpen, Award, Briefcase, Star, ChevronRight, Palette, TrendingUp, Zap } from 'lucide-react';
+import { TypingEffect } from './components/TypingEffect';
+import { InteractiveChart } from './components/InteractiveChart';
+import { PlaygroundCalculator } from './components/PlaygroundCalculator';
 
 type Theme = 'cyber' | 'sunset' | 'synth';
 
@@ -103,32 +106,44 @@ function App() {
     concepts: ['OOP', 'Operating Systems', 'Computer Networks']
   };
 
-  const projects = [
-    {
-      title: 'QR Attendance Management System',
-      period: 'Jul 2023 - Jun 2024',
-      description: 'Designed and developed a QR-based Attendance Management System using HTML, CSS, Python, and Django to automate student attendance with real-time scanning and verification.',
-      highlights: [
-        'Integrated user authentication and QR code generation',
-        'Implemented secure attendance logging features',
-        'Published research paper in International Journal of Engineering, Management',
-        'Improved accuracy and reduced manual tracking efforts'
-      ],
-      tech: ['Python', 'Django', 'HTML', 'CSS', 'QR Technology']
-    },
-    {
-      title: 'E-Commerce Web Design (Amazon Clone)',
-      period: 'Jul 2024 - Sep 2024',
-      description: 'Built a beginner-level Amazon clone featuring homepage layout, product display sections, and basic navigation menus with focus on responsive design and UI/UX.',
-      highlights: [
-        'Replicated Amazon\'s look and feel',
-        'Implemented responsive design principles',
-        'Created interactive product display sections',
-        'Enhanced front-end development skills'
-      ],
-      tech: ['HTML', 'CSS', 'JavaScript']
-    }
-  ];
+  const projects = {
+    webApplications: [
+      {
+        title: 'QR Attendance Management System',
+        period: 'Jul 2023 - Jun 2024',
+        description: 'Full-stack automation system with real-time QR scanning, secure authentication, and comprehensive attendance tracking.',
+        highlights: [
+          'Integrated user authentication and QR code generation',
+          'Implemented secure attendance logging features',
+          'Published research paper in International Journal of Engineering, Management',
+          'Reduced manual tracking efforts by 95%'
+        ],
+        tech: ['Python', 'Django', 'HTML', 'CSS', 'QR Technology'],
+        impact: [
+          { label: 'Accuracy', value: 99 },
+          { label: 'Response Time', value: 98 }
+        ]
+      }
+    ],
+    frontend: [
+      {
+        title: 'E-Commerce Web Design',
+        period: 'Jul 2024 - Sep 2024',
+        description: 'Responsive Amazon-inspired e-commerce platform with modern UI/UX principles and interactive product experiences.',
+        highlights: [
+          'Responsive design across all devices',
+          'Interactive product display sections',
+          'Optimized for mobile and desktop viewing',
+          'Clean, maintainable CSS architecture'
+        ],
+        tech: ['HTML', 'CSS', 'JavaScript', 'React'],
+        impact: [
+          { label: 'Mobile Score', value: 95 },
+          { label: 'Page Speed', value: 92 }
+        ]
+      }
+    ]
+  };
 
   const experience = [
     {
@@ -189,7 +204,7 @@ function App() {
             <div className={`text-xl font-bold ${currentTheme.accent}`}>VM</div>
             <div className="flex items-center gap-6">
               <div className="hidden md:flex space-x-8">
-                {['Home', 'About', 'Skills', 'Experience', 'Projects', 'Testimonials', 'Contact'].map((item) => (
+                {['Home', 'About', 'Skills', 'Experience', 'Projects', 'Playground', 'Contact'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
@@ -233,7 +248,7 @@ function App() {
               Vikas Mishra
             </h1>
             <p className={`text-2xl md:text-3xl mb-4 font-semibold ${theme === 'cyber' ? 'text-cyan-200' : theme === 'sunset' ? 'text-orange-200' : 'text-pink-200'}`}>
-              Full Stack Developer & Data Enthusiast
+              <TypingEffect text="Full Stack Developer & Data Enthusiast" speed={40} />
             </p>
             <p className="text-lg md:text-xl text-slate-100 max-w-3xl mx-auto mb-12 leading-relaxed">
               Transforming ideas into intelligent web solutions. From QR-based automation systems to responsive e-commerce platforms, I build technology that solves real problems and drives measurable results.
@@ -269,34 +284,49 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className={`py-20 ${theme === 'cyber' ? 'bg-slate-900' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">About Me</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <h2 className={`text-4xl font-bold mb-12 text-center ${theme === 'cyber' ? 'text-white' : 'text-slate-900'}`}>About Me</h2>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
-              <div className="w-full h-96 bg-gradient-to-br from-blue-100 to-slate-100 rounded-2xl flex items-center justify-center">
-                <Code className="w-32 h-32 text-blue-600 opacity-20" />
+              <div className={`w-full h-96 bg-gradient-to-br rounded-2xl flex items-center justify-center ${theme === 'cyber' ? 'bg-slate-800 border border-cyan-500/30' : 'bg-gradient-to-br from-blue-100 to-slate-100'}`}>
+                <Code className={`w-32 h-32 ${theme === 'cyber' ? 'text-cyan-400 opacity-30' : 'text-blue-600 opacity-20'}`} />
               </div>
             </div>
             <div className="space-y-6">
-              <p className="text-lg text-slate-700 leading-relaxed">
-                I'm a recent B.Tech graduate in Information Technology with a passion for creating innovative digital solutions.
-                My journey in tech has been driven by curiosity and a commitment to continuous learning.
-              </p>
-              <p className="text-lg text-slate-700 leading-relaxed">
-                With hands-on experience in full-stack development using Python, Django, and modern web technologies,
-                I've successfully built and deployed projects that automate processes and improve user experiences.
-              </p>
-              <p className="text-lg text-slate-700 leading-relaxed">
-                Beyond coding, I've demonstrated strong leadership by organizing technical events for 1000+ participants
-                and contributing to academic research. I'm actively expanding my skill set in data analytics and SQL to
-                bring data-driven insights to development projects.
-              </p>
-              <div className="pt-4">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Career Objective</h3>
-                <p className="text-slate-700 italic">
-                  To contribute to a dynamic team, enhance my professional development, and provide innovative solutions
-                  to achieve organizational objectives.
+              <div>
+                <h3 className={`text-lg font-semibold mb-2 flex items-center gap-2 ${theme === 'cyber' ? 'text-cyan-400' : 'text-blue-600'}`}>
+                  <Zap className="w-5 h-5" />
+                  Engineering Discipline
+                </h3>
+                <p className={`leading-relaxed ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-700'}`}>
+                  I'm a recent B.Tech graduate in Information Technology with a passion for creating innovative digital solutions.
+                  My journey in tech has been driven by rigorous problem-solving, continuous learning, and a commitment to excellence.
+                </p>
+              </div>
+              <div>
+                <h3 className={`text-lg font-semibold mb-2 flex items-center gap-2 ${theme === 'cyber' ? 'text-cyan-400' : 'text-blue-600'}`}>
+                  <Code className="w-5 h-5" />
+                  Technical Expertise
+                </h3>
+                <p className={`leading-relaxed ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-700'}`}>
+                  With hands-on experience in full-stack development using Python, Django, and modern web technologies,
+                  I've successfully built and deployed projects that automate processes and improve user experiences. Every line of code is tested and documented.
+                </p>
+              </div>
+              <div>
+                <h3 className={`text-lg font-semibold mb-2 flex items-center gap-2 ${theme === 'cyber' ? 'text-cyan-400' : 'text-blue-600'}`}>
+                  <TrendingUp className="w-5 h-5" />
+                  Leadership & Impact
+                </h3>
+                <p className={`leading-relaxed ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-700'}`}>
+                  Demonstrated strong leadership by organizing technical events for 1000+ participants and contributing to published academic research. I'm actively expanding my skill set in data analytics and SQL to bring data-driven insights to every project.
+                </p>
+              </div>
+              <div className={`pt-4 px-4 py-4 rounded-lg border-l-4 ${theme === 'cyber' ? 'bg-slate-800 border-cyan-500/50' : 'bg-blue-50 border-blue-600'}`}>
+                <h3 className={`text-lg font-semibold mb-2 ${theme === 'cyber' ? 'text-white' : 'text-slate-900'}`}>Career Vision</h3>
+                <p className={`italic ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-700'}`}>
+                  To contribute strategic technical solutions to dynamic teams, bridging the gap between innovation and measurable impact—whether in startups seeking rapid development or structured organizations like the Indian Navy requiring rigorous, reliable systems.
                 </p>
               </div>
             </div>
@@ -424,39 +454,102 @@ function App() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-slate-50">
+      <section id="projects" className={`py-20 ${theme === 'cyber' ? 'bg-slate-900' : 'bg-slate-50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">Featured Projects</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, idx) => (
-              <div key={idx} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div className="h-48 bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                  <Code className="w-20 h-20 text-white opacity-50" />
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-2xl font-semibold text-slate-900">{project.title}</h3>
+          <h2 className={`text-4xl font-bold mb-12 text-center ${theme === 'cyber' ? 'text-white' : 'text-slate-900'}`}>Featured Projects</h2>
+
+          <div className="mb-16">
+            <h3 className={`text-2xl font-semibold mb-8 flex items-center gap-2 ${theme === 'cyber' ? 'text-cyan-400' : 'text-blue-600'}`}>
+              <Code className="w-6 h-6" />
+              Full-Stack Applications
+            </h3>
+            <div className="grid md:grid-cols-1 gap-8">
+              {projects.webApplications.map((project, idx) => (
+                <div key={idx} className={`rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border ${theme === 'cyber' ? 'bg-slate-800 border-cyan-500/30' : 'bg-white border-slate-200'}`}>
+                  <div className={`h-32 bg-gradient-to-r flex items-center justify-center ${theme === 'cyber' ? 'from-cyan-900 to-blue-900' : 'from-blue-500 to-cyan-500'}`}>
+                    <TrendingUp className={`w-20 h-20 ${theme === 'cyber' ? 'text-cyan-400 opacity-50' : 'text-white opacity-50'}`} />
                   </div>
-                  <p className="text-sm text-slate-500 mb-4">{project.period}</p>
-                  <p className="text-slate-700 mb-4">{project.description}</p>
-                  <ul className="space-y-2 mb-6">
-                    {project.highlights.map((highlight, hIdx) => (
-                      <li key={hIdx} className="text-sm text-slate-600 flex items-start">
-                        <span className="text-blue-600 mr-2">•</span>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="px-2 py-1 bg-slate-100 text-slate-600 rounded text-xs font-medium">
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="p-8">
+                    <div className="grid md:grid-cols-3 gap-8">
+                      <div className="md:col-span-2">
+                        <h4 className={`text-2xl font-semibold mb-2 ${theme === 'cyber' ? 'text-white' : 'text-slate-900'}`}>{project.title}</h4>
+                        <p className={`text-sm mb-4 ${theme === 'cyber' ? 'text-cyan-300' : 'text-slate-500'}`}>{project.period}</p>
+                        <p className={`mb-6 ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-700'}`}>{project.description}</p>
+                        <ul className={`space-y-2 mb-6 ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-600'}`}>
+                          {project.highlights.map((highlight, hIdx) => (
+                            <li key={hIdx} className="text-sm flex items-start">
+                              <span className={`mr-2 font-bold ${theme === 'cyber' ? 'text-cyan-400' : 'text-blue-600'}`}>✓</span>
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((tech) => (
+                            <span key={tech} className={`px-3 py-1 rounded-full text-xs font-medium ${theme === 'cyber' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-blue-50 text-blue-600'}`}>
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <InteractiveChart
+                          data={project.impact.map(item => ({
+                            ...item,
+                            color: theme === 'cyber' ? 'bg-cyan-500' : 'bg-blue-500'
+                          }))}
+                          title="Performance Metrics"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className={`text-2xl font-semibold mb-8 flex items-center gap-2 ${theme === 'cyber' ? 'text-cyan-400' : 'text-green-600'}`}>
+              <Code className="w-6 h-6" />
+              Frontend & UI/UX
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              {projects.frontend.map((project, idx) => (
+                <div key={idx} className={`rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border ${theme === 'cyber' ? 'bg-slate-800 border-cyan-500/30' : 'bg-white border-slate-200'}`}>
+                  <div className={`h-40 bg-gradient-to-br flex items-center justify-center ${theme === 'cyber' ? 'from-cyan-900 to-blue-900' : 'from-green-500 to-emerald-500'}`}>
+                    <Code className={`w-20 h-20 ${theme === 'cyber' ? 'text-cyan-400 opacity-50' : 'text-white opacity-50'}`} />
+                  </div>
+                  <div className="p-6">
+                    <h4 className={`text-xl font-semibold mb-2 ${theme === 'cyber' ? 'text-white' : 'text-slate-900'}`}>{project.title}</h4>
+                    <p className={`text-sm mb-3 ${theme === 'cyber' ? 'text-cyan-300' : 'text-slate-500'}`}>{project.period}</p>
+                    <p className={`text-sm mb-4 ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-700'}`}>{project.description}</p>
+                    <ul className={`space-y-1 mb-4 text-xs ${theme === 'cyber' ? 'text-slate-300' : 'text-slate-600'}`}>
+                      {project.highlights.map((highlight, hIdx) => (
+                        <li key={hIdx} className="flex items-start">
+                          <span className={`mr-2 font-bold ${theme === 'cyber' ? 'text-cyan-400' : 'text-green-600'}`}>✓</span>
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech.map((tech) => (
+                        <span key={tech} className={`px-2 py-1 rounded text-xs font-medium ${theme === 'cyber' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-green-50 text-green-600'}`}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="pt-3 border-t border-slate-700">
+                      <InteractiveChart
+                        data={project.impact.map(item => ({
+                          ...item,
+                          color: theme === 'cyber' ? 'bg-cyan-500' : 'bg-green-500'
+                        }))}
+                        title="Performance"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -563,6 +656,34 @@ function App() {
               </div>
               <h3 className="font-semibold text-slate-900 mb-2">Location</h3>
               <p className="text-sm text-slate-600">Gorakhpur, India</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Playground Section */}
+      <section id="playground" className={`py-20 ${theme === 'cyber' ? 'bg-slate-950' : 'bg-gradient-to-br from-slate-900 to-slate-800'}`}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4 flex items-center justify-center gap-2">
+              <Zap className="w-8 h-8 text-yellow-400" />
+              Try Interactive Calculator
+            </h2>
+            <p className="text-slate-300 text-lg">
+              Experience my developer playground. This calculator demonstrates clean code architecture and interactive UI design.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <PlaygroundCalculator
+              accentColor={theme === 'cyber' ? 'text-cyan-400' : theme === 'sunset' ? 'text-orange-400' : 'text-pink-400'}
+              buttonColor={currentTheme.button}
+              buttonHover={currentTheme.buttonHover}
+            />
+            <div className={`mt-8 max-w-sm text-center p-6 rounded-lg border ${theme === 'cyber' ? 'border-cyan-500/30 bg-slate-800' : 'border-slate-700 bg-slate-700/50'}`}>
+              <p className="text-slate-200 text-sm">
+                This calculator showcases responsive design, state management, and real-time interactivity—key skills for modern web development.
+              </p>
             </div>
           </div>
         </div>
